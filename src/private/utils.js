@@ -18,12 +18,17 @@ export function isDescriptor(desc) {
 
   return false;
 }
-
+// 这个函数的作用就是, 如果最后一个参数是 descriptor, 则直接执行原始的descriptor, 
+// 否则返回一个正常的 decorator 的包装 wrap 了 handleDescriptor.
 export function decorate(handleDescriptor, entryArgs) {
-  if (isDescriptor(entryArgs[entryArgs.length - 1])) {
-    return handleDescriptor(...entryArgs, []);
+  if (isDescriptor(entryArgs[entryArgs.length - 1])) { // if last arg is a descriptor value
+    // call handleDescriptor with `target, key, descriptor` follow with empty array as args
+    return handleDescriptor(...entryArgs, []); 
   } else {
-    return function () {
+    return function () { 
+      // else return a function, that combine `target, key, descriptor` with decorator args as array.
+      // entryArgs is array with decorator arguments
+      // eg. `@debounce(500)` will be `handleDescriptor(target, key, descriptor, 500)`
       return handleDescriptor(...Array.prototype.slice.call(arguments), entryArgs);
     };
   }

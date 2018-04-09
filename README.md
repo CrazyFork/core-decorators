@@ -1,3 +1,13 @@
+# notes
+* src/lazy-initialize.js, 这个 decorator 的写法刷新了我对 property descriptor 的认知, 修改了既有属性的 assign , 但是通过 initializer 
+  修改初始的 assign 过程真是有点诡异呢. 反正这个点需要以后再看看. 可以对js底层机制有个更好的理解.
+
+
+
+
+
+
+
 # core-decorators.js [![Build Status](https://travis-ci.org/jayphelps/core-decorators.svg?branch=master)](https://travis-ci.org/jayphelps/core-decorators)
 
 Library of [JavaScript stage-0 decorators](https://github.com/wycats/javascript-decorators) (aka ES2016/ES7 decorators [but that's not accurate](https://medium.com/@jayphelps/please-stop-referring-to-proposed-javascript-features-as-es7-cad29f9dcc4b)) inspired by languages that come with built-ins like @​override, @​deprecate, @​autobind, @​mixin and more. Popular with React/Angular, but is framework agnostic. Similar to [Annotations in Java](https://docs.oracle.com/javase/tutorial/java/annotations/predefined.html) but unlike Java annotations, decorators are functions which are applied at runtime.

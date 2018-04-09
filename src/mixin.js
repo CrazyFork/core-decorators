@@ -29,6 +29,7 @@ function hasProperty(prop, obj) {
   }
 }
 
+// 这个文件看这个地方就可以了, copy all the definitions to the target.prototype
 function handleClass(target, mixins) {
   if (!mixins.length) {
     throw new SyntaxError(`@mixin() class ${target.name} requires at least one mixin as an argument`);

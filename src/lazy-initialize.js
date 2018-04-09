@@ -25,7 +25,7 @@ function handleDescriptor(target, key, descriptor) {
 
       return ret;
     },
-
+    // :todo, why a defaultSetter has to be created here?
     set: createDefaultSetter(key)
   };
 }

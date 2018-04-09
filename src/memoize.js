@@ -1,7 +1,7 @@
 import { decorate, internalDeprecation } from './private/utils';
 
 function toObject(cache, value) {
-  if (value === Object(value)) {
+  if (value === Object(value)) { // :?
     return value;  
   }
   return cache[value] || (cache[value] = {});
@@ -48,13 +48,15 @@ function handleDescriptor(target, key, descriptor) {
       for (let i = 0, l = args.length; i < l; i++) {
         let arg = args[i];
         let argRef = toObject(primativeRefCache, arg);
-        let argKey = argumentCache.get(argRef);
+        // :bm, WeakMap 的key不能是primitive type, 所以之前的那一步调用了 toObject, 将 primitive type 转换成了object type
+        let argKey = argumentCache.get(argRef); 
         
         if (argKey === undefined) {
           argKey = ++argumentIdCounter;
           argumentCache.set(argRef, argKey);
         }
-        
+        // 这个 signature 的 key 就是以参数数目为key生成的, 比如有2个参数, 这个 signature 最终的结果就是 012,
+        // 所以在某些情况下这个 memoize 会出现问题
         signature += argKey;
       }
       
